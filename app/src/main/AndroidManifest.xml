@@ -19,7 +19,8 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".AdminAddUserActivity" />
         <activity android:name=".AdminAddPlaceActivity" />
-        <activity android:name=".AdminAddPackageActivity"></activity>
+        <activity android:name=".AdminAddPackageActivity" />
+        <activity android:name=".AdminAddGuideActivity"></activity>
     </application>
 
 </manifest>

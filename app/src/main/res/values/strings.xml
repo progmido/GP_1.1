@@ -7,8 +7,9 @@
     <string name="end"><b>End 8/6/2017 12:00</b></string>
     <string name="start"><b>Start 1/6/2017 12:00</b></string>
     <string name="price"><b>21,829 USD</b></string>
-    <string name="updatePackage"><b>Select Package to edit</b></string>
     <string name="deleteUser"><b>select user to delete</b></string>
+    <string name="updateGuide"><b>Select Guide to edit</b></string>
+    <string name="updatePackage"><b>Select Package to edit</b></string>
     <string name="updatePlace">select place to edit</string>
     <string name="don_t_have_an_account">Don\'t have an account?</string>
     <string name="password">Password</string>

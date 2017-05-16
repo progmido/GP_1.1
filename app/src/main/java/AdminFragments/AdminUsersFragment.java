@@ -3,9 +3,7 @@ package AdminFragments;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,7 +17,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import AdminModels.model_user;
-import io.google.gp_11.AdminAddUserActivity;
 import io.google.gp_11.R;
 
 public class AdminUsersFragment extends Fragment {
@@ -53,16 +50,6 @@ public class AdminUsersFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_users_admin, container, false);
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
-        fab.setImageResource(R.drawable.adduser);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Click action
-                Intent intent = new Intent(getActivity(), AdminAddUserActivity.class);
-                startActivity(intent);
-            }
-        });
         recyclerView = (RecyclerView) view.findViewById(R.id.recycleViewUsers);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         updateUI();

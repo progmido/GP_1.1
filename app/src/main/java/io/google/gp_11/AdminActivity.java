@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import AdminFragments.AdminGuidesFragmemnt;
 import AdminFragments.AdminHomeFragment;
 import AdminFragments.AdminPackagesFragment;
 import AdminFragments.AdminPlacesFragment;
@@ -72,7 +73,7 @@ public class AdminActivity extends AppCompatActivity {
                                 mToolbar.setTitle("Users");
                                 break;
                             case R.id.nav_guides:
-                                fragmentClass = AdminPackagesFragment.class;
+                                fragmentClass = AdminGuidesFragmemnt.class;
                                 mToolbar.setTitle("Guides");
                                 break;
                             case R.id.nav_packages:

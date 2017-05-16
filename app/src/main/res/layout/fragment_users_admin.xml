@@ -28,6 +28,4 @@
             android:scrollbars="vertical" />
     </LinearLayout>
 
-    <include layout="@layout/fab" />
-
 </FrameLayout>
