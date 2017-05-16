@@ -1,4 +1,4 @@
-package io.google.gp_11;
+package AdminFragments;
 
 
 import android.content.Context;
@@ -15,6 +15,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import AdminModels.model_place;
+import io.google.gp_11.AdminAddPlaceActivity;
+import io.google.gp_11.R;
 
 
 /**
@@ -41,15 +45,6 @@ public class AdminPlacesFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static AdminPlacesFragment newInstance(int pageNo) {
-
-        Bundle args = new Bundle();
-        args.putInt(ARG_PAGE, pageNo);
-        AdminPlacesFragment fragment = new AdminPlacesFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         placeModels = new ArrayList<>();
@@ -59,7 +54,7 @@ public class AdminPlacesFragment extends Fragment {
             placeModels.add(PlaceModelForRecyclerView);
         }
         super.onCreate(savedInstanceState);
-        mPageNo = getArguments().getInt(ARG_PAGE);
+
     }
 
     @Override
@@ -67,8 +62,6 @@ public class AdminPlacesFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_places_admin, container, false);
-        TextView myTextView_bold = (TextView) view.findViewById(R.id.toolbarText);
-        myTextView_bold.setText("Places");
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setImageResource(R.drawable.addplace);
         fab.setOnClickListener(new View.OnClickListener() {

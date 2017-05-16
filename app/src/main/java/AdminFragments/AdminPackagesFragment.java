@@ -1,4 +1,4 @@
-package io.google.gp_11;
+package AdminFragments;
 
 
 import android.content.Context;
@@ -14,6 +14,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import AdminModels.model_package;
+import io.google.gp_11.AdminAddPackageActivity;
+import io.google.gp_11.R;
 
 
 /**
@@ -32,21 +36,11 @@ public class AdminPackagesFragment extends Fragment {
     private RecyclerView recyclerView;
     private fragment_package_adapter PackageAdapter;
 
-    public static final String ARG_PAGE = "ARG_PAGE";
-    private int mPageNo;
-
     public AdminPackagesFragment() {
         // Required empty public constructor
     }
 
-    public static AdminPackagesFragment newInstance(int pageNo) {
 
-        Bundle args = new Bundle();
-        args.putInt(ARG_PAGE, pageNo);
-        AdminPackagesFragment fragment = new AdminPackagesFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,7 +50,7 @@ public class AdminPackagesFragment extends Fragment {
             packageModels.add(PackageModelForRecyclerView);
         }
         super.onCreate(savedInstanceState);
-        mPageNo = getArguments().getInt(ARG_PAGE);
+
     }
 
     @Override
@@ -64,8 +58,6 @@ public class AdminPackagesFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_packages_admin, container, false);
-        TextView myTextView_bold = (TextView) view.findViewById(R.id.toolbarText);
-        myTextView_bold.setText("Packages");
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setImageResource(R.drawable.addpackage);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +70,6 @@ public class AdminPackagesFragment extends Fragment {
         });
         recyclerView = (RecyclerView) view.findViewById(R.id.recycleViewPackages);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
         updateUI();
         return view;
     }

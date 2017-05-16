@@ -1,4 +1,4 @@
-package io.google.gp_11;
+package AdminFragments;
 
 
 import android.content.Context;
@@ -8,31 +8,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import io.google.gp_11.R;
+
 
 public class AdminProfileFragment extends Fragment {
 
-    public static final String ARG_PAGE = "ARG_PAGE";
-    private int mPageNo;
 
     public AdminProfileFragment() {
         // Required empty public constructor
     }
 
-    public static AdminProfileFragment newInstance(int pageNo) {
-
-        Bundle args = new Bundle();
-        args.putInt(ARG_PAGE, pageNo);
-        AdminProfileFragment fragment = new AdminProfileFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPageNo = getArguments().getInt(ARG_PAGE);
-    }
 
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

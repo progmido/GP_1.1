@@ -1,4 +1,4 @@
-package io.google.gp_11;
+package AdminFragments;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +14,10 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import AdminModels.model_user;
+import io.google.gp_11.AdminAddUserActivity;
+import io.google.gp_11.R;
+
 public class AdminUsersFragment extends Fragment {
 
     private Integer[] IMAGE = {R.drawable.person1, R.drawable.person4, R.drawable.person5};
@@ -24,21 +28,11 @@ public class AdminUsersFragment extends Fragment {
     private RecyclerView recyclerView;
     private fragment_user_adapter UserAdapter;
 
-    public static final String ARG_PAGE = "ARG_PAGE";
-    private int mPageNo;
 
     public AdminUsersFragment() {
         // Required empty public constructor
     }
 
-    public static AdminUsersFragment newInstance(int pageNo) {
-
-        Bundle args = new Bundle();
-        args.putInt(ARG_PAGE, pageNo);
-        AdminUsersFragment fragment = new AdminUsersFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,7 +42,6 @@ public class AdminUsersFragment extends Fragment {
             userModels.add(UserModelForRecyclerView);
         }
         super.onCreate(savedInstanceState);
-        mPageNo = getArguments().getInt(ARG_PAGE);
     }
 
     @Override
@@ -56,8 +49,6 @@ public class AdminUsersFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_users_admin, container, false);
-        TextView myTextView_bold = (TextView) view.findViewById(R.id.toolbarText);
-        myTextView_bold.setText("Users");
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setImageResource(R.drawable.adduser);
         fab.setOnClickListener(new View.OnClickListener() {

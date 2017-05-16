@@ -1,105 +1,104 @@
 package io.google.gp_11;
 
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
+
+import AdminFragments.AdminHomeFragment;
+import AdminFragments.AdminPackagesFragment;
+import AdminFragments.AdminPlacesFragment;
+import AdminFragments.AdminUsersFragment;
 
 public class AdminActivity extends AppCompatActivity {
-    private TabLayout mTabLayout;
-
-    private int[] mTabsIcons = {
-            R.drawable.icon_home,
-            R.drawable.icon_users,
-            R.drawable.icon_guides,
-            R.drawable.icon_packages,
-            R.drawable.icon_places
-//            , R.drawable.icon_profile
-    };
+    private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle mToggle;
+    private Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
+        mToolbar = (Toolbar) findViewById(R.id.nav_actionbar);
+        setSupportActionBar(mToolbar);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+        mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
+        mDrawerLayout.addDrawerListener(mToggle);
+        mToggle.syncState();
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        setupDrawerContent(navigationView);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        // Setup the viewPager
-        ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
-        MyPagerAdapter pagerAdapter = new MyPagerAdapter(getSupportFragmentManager());
-        if (viewPager != null)
-            viewPager.setAdapter(pagerAdapter);
 
-        mTabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        if (mTabLayout != null) {
-            mTabLayout.setupWithViewPager(viewPager);
-
-            for (int i = 0; i < mTabLayout.getTabCount(); i++) {
-                TabLayout.Tab tab = mTabLayout.getTabAt(i);
-                if (tab != null)
-                    tab.setCustomView(pagerAdapter.getTabView(i));
-            }
-
-            mTabLayout.getTabAt(0).getCustomView().setSelected(true);
-        }
     }
 
-    private class MyPagerAdapter extends FragmentPagerAdapter {
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
 
-        public final int PAGE_COUNT = 5;
-
-        private final String[] mTabsTitle = {"Home", "Users", "Guides", "Pckgs", "Places"
-//                , "Profile"
-        };
-
-        public MyPagerAdapter(FragmentManager fm) {
-            super(fm);
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                mDrawerLayout.openDrawer(GravityCompat.START);
+                return true;
         }
+        return super.onOptionsItemSelected(item);
+    }
 
-        public View getTabView(int position) {
-            // Given you have a custom layout in `res/layout/custom_tab.xml` with a TextView and ImageView
-            View view = LayoutInflater.from(AdminActivity.this).inflate(R.layout.custom_tab, null);
-            TextView title = (TextView) view.findViewById(R.id.title);
-            title.setText(mTabsTitle[position]);
-            ImageView icon = (ImageView) view.findViewById(R.id.icon);
-            icon.setImageResource(mTabsIcons[position]);
-            return view;
-        }
+    private void setupDrawerContent(final NavigationView navigationView) {
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        Fragment fragment = null;
+                        Class fragmentClass;
+                        switch (menuItem.getItemId()) {
+                            case R.id.nav_home:
+                                fragmentClass = AdminHomeFragment.class;
+                                mToolbar.setTitle("Home");
+                                break;
+                            case R.id.nav_users:
+                                fragmentClass = AdminUsersFragment.class;
+                                mToolbar.setTitle("Users");
+                                break;
+                            case R.id.nav_guides:
+                                fragmentClass = AdminPackagesFragment.class;
+                                mToolbar.setTitle("Guides");
+                                break;
+                            case R.id.nav_packages:
+                                fragmentClass = AdminPackagesFragment.class;
+                                mToolbar.setTitle("Packages");
+                                break;
+                            case R.id.nav_places:
+                                fragmentClass = AdminPlacesFragment.class;
+                                mToolbar.setTitle("Places");
+                                break;
 
-        @Override
-        public Fragment getItem(int pos) {
-            switch (pos) {
+                            default:
+                                fragmentClass = AdminHomeFragment.class;
+                        }
 
-                case 0:
-                    return AdminHomeFragment.newInstance(1);
+                        try {
+                            fragment = (Fragment) fragmentClass.newInstance();
 
-                case 1:
-                    return AdminUsersFragment.newInstance(2);
-                case 2:
-                    return AdminUsersFragment.newInstance(3);
-                case 3:
-                    return AdminPackagesFragment.newInstance(4);
-                case 4:
-                    return AdminPlacesFragment.newInstance(5);
-//                case 5:
-//                    return AdminUsersFragment.newInstance(6);
-            }
-            return null;
-        }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
 
-        @Override
-        public int getCount() {
-            return PAGE_COUNT;
-        }
+                        // Insert the fragment by replacing any existing fragment
+                        FragmentManager fragmentManager = getSupportFragmentManager();
+                        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
 
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mTabsTitle[position];
-        }
+                        // Highlight the selected item has been done by NavigationView
+//                        menuItem.setChecked(true);
+                        // Close the navigation drawer
+                        mDrawerLayout.closeDrawers();
+                        return true;
+                    }
+                });
     }
 }

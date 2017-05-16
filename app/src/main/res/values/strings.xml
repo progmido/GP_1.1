@@ -17,5 +17,6 @@
     <string name="username">Username</string>
     <string name="the_logo">the_Logo</string>
     <string name="title_top">Top fragment</string>
-
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>

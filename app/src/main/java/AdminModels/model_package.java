@@ -1,4 +1,4 @@
-package io.google.gp_11;
+package AdminModels;
 
 /**
  * Created by Abu-elhassan on 5/10/2017.
