@@ -35,8 +35,13 @@ public class AdminActivity extends AppCompatActivity {
         setupDrawerContent(navigationView);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        if (savedInstanceState == null) {
+            navigationView.getMenu().performIdentifierAction(R.id.nav_home, 0);
+            navigationView.getMenu().getItem(0).setChecked(true);
+        }
 
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -58,6 +63,7 @@ public class AdminActivity extends AppCompatActivity {
                         Class fragmentClass;
                         switch (menuItem.getItemId()) {
                             case R.id.nav_home:
+
                                 fragmentClass = AdminHomeFragment.class;
                                 mToolbar.setTitle("Home");
                                 break;
