@@ -20,7 +20,8 @@
         <activity android:name=".AdminAddUserActivity" />
         <activity android:name=".AdminAddPlaceActivity" />
         <activity android:name=".AdminAddPackageActivity" />
-        <activity android:name=".AdminAddGuideActivity"></activity>
+        <activity android:name=".AdminAddGuideActivity" />
+        <activity android:name=".AdminUpdateUser"></activity>
     </application>
 
 </manifest>

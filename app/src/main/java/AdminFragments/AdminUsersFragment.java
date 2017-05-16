@@ -1,8 +1,7 @@
 package AdminFragments;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,11 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import AdminModels.model_user;
+import io.google.gp_11.AdminUpdateUser;
 import io.google.gp_11.R;
 
 public class AdminUsersFragment extends Fragment {
@@ -97,28 +96,30 @@ public class AdminUsersFragment extends Fragment {
             holder.ln.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
-                    alertDialog.setTitle("Confirm Delete...");
-                    alertDialog.setMessage("Are you sure you want delete this?");
-                    alertDialog.setIcon(R.drawable.delete);
-                    alertDialog.setPositiveButton("YES",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    // Write your code here to execute after dialog
-                                    Toast.makeText(getActivity(), "You clicked on YES", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                    alertDialog.setNegativeButton("NO",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    // Write your code here to execute after dialog
-
-                                    dialog.cancel();
-                                }
-                            });
-
-                    // Showing Alert Message
-                    alertDialog.show();
+                    Intent intent = new Intent(getActivity(), AdminUpdateUser.class);
+                    startActivity(intent);
+//AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+//                    alertDialog.setTitle("Confirm Delete...");
+//                    alertDialog.setMessage("Are you sure you want delete this?");
+//                    alertDialog.setIcon(R.drawable.delete);
+//                    alertDialog.setPositiveButton("YES",
+//                            new DialogInterface.OnClickListener() {
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                    // Write your code here to execute after dialog
+//                                    Toast.makeText(getActivity(), "You clicked on YES", Toast.LENGTH_SHORT).show();
+//                                }
+//                            });
+//                    alertDialog.setNegativeButton("NO",
+//                            new DialogInterface.OnClickListener() {
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                    // Write your code here to execute after dialog
+//
+//                                    dialog.cancel();
+//                                }
+//                            });
+//
+//                    // Showing Alert Message
+//                    alertDialog.show();
                 }
             });
 

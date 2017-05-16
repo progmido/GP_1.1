@@ -12,12 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import AdminModels.model_guide;
 import io.google.gp_11.AdminAddPackageActivity;
+import io.google.gp_11.AdminUpdateUser;
 import io.google.gp_11.R;
 
 public class AdminGuidesFragmemnt extends Fragment {
@@ -113,7 +113,8 @@ public class AdminGuidesFragmemnt extends Fragment {
             holder.ln.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(getActivity(), "i'm guide", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getActivity(), AdminUpdateUser.class);
+                    startActivity(intent);
 
                 }
             });
