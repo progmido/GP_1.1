@@ -1,6 +1,8 @@
 package AdminFragments;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -10,7 +12,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -75,11 +79,13 @@ public class AdminUsersFragment extends Fragment {
         de.hdodenhof.circleimageview.CircleImageView userimage;
         TextView username;
         TextView usercounrty;
+        LinearLayout ln;
         public UsersHolder(View view) {
             super(view);
             userimage = (de.hdodenhof.circleimageview.CircleImageView) view.findViewById(R.id.personimage);
             username = (TextView) view.findViewById(R.id.username);
             usercounrty = (TextView) view.findViewById(R.id.usercountry);
+            ln = (LinearLayout) view.findViewById(R.id.linearLayoutUser);
 
         }
     }
@@ -101,6 +107,34 @@ public class AdminUsersFragment extends Fragment {
             holder.userimage.setImageResource(modela.getImage());
             holder.username.setText(modela.getName());
             holder.usercounrty.setText(modela.getCountry());
+            holder.ln.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+                    alertDialog.setTitle("Confirm Delete...");
+                    alertDialog.setMessage("Are you sure you want delete this?");
+                    alertDialog.setIcon(R.drawable.delete);
+                    alertDialog.setPositiveButton("YES",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // Write your code here to execute after dialog
+                                    Toast.makeText(getActivity(), "You clicked on YES", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                    alertDialog.setNegativeButton("NO",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // Write your code here to execute after dialog
+
+                                    dialog.cancel();
+                                }
+                            });
+
+                    // Showing Alert Message
+                    alertDialog.show();
+                }
+            });
+
 
         }
         @Override
