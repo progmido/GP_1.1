@@ -37,11 +37,11 @@ public class AdminActivity extends AppCompatActivity {
 
         if (savedInstanceState == null) {
             navigationView.getMenu().performIdentifierAction(R.id.nav_home, 0);
+            mToolbar.setTitle("Home");
             navigationView.getMenu().getItem(0).setChecked(true);
         }
 
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
