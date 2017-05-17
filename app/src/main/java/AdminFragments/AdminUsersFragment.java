@@ -98,7 +98,7 @@ public class AdminUsersFragment extends Fragment {
                 public void onClick(View v) {
                     Intent intent = new Intent(getActivity(), AdminUpdateUser.class);
                     startActivity(intent);
-//AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+//                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
 //                    alertDialog.setTitle("Confirm Delete...");
 //                    alertDialog.setMessage("Are you sure you want delete this?");
 //                    alertDialog.setIcon(R.drawable.delete);
