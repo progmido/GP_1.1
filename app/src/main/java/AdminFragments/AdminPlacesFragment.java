@@ -28,6 +28,8 @@ public class AdminPlacesFragment extends Fragment {
 
     private Integer[] IMAGE = {R.drawable.pyramids, R.drawable.tower, R.drawable.egyptianmuseum,R.drawable.sinai};
     private String[] placeName = {"Pyramids", "Cairo Tower", "Egyptian Museum","Mount Sinai"};
+    private String[] govenate = {"Giza", "Cairo", "Cairo", "Sinai"};
+    private String[] category = {"historical", "historical", "historical", "historical"};
     private String[] placeDescription = {"The Egyptian pyramids are ancient pyramid-shaped masonry structures located in Egypt. The Great Pyramid was listed as one of the Seven Wonders of the World.",
             "The Cairo Tower is a free-standing concrete tower located in Cairo, Egypt. At 187 m (614 ft), it has been the tallest structure in Egypt and North Africa for about 50 years",
             "The Museum of Egyptian Antiquities is home to an extensive collection of ancient Egyptian antiquities. It has 120,000 items, with a representative amount on display, the remainder in storerooms",
@@ -38,9 +40,6 @@ public class AdminPlacesFragment extends Fragment {
     private RecyclerView recyclerView;
     private fragment_place_adapter placeAdapter;
 
-    public static final String ARG_PAGE = "ARG_PAGE";
-    private int mPageNo;
-
     public AdminPlacesFragment() {
         // Required empty public constructor
     }
@@ -50,7 +49,7 @@ public class AdminPlacesFragment extends Fragment {
         placeModels = new ArrayList<>();
         for(int i=0 ;i<placeName.length;i++)
         {
-            model_place PlaceModelForRecyclerView = new model_place(IMAGE[i],placeName[i],placeDescription[i]);
+            model_place PlaceModelForRecyclerView = new model_place(IMAGE[i], placeName[i], placeDescription[i], govenate[i], category[i]);
             placeModels.add(PlaceModelForRecyclerView);
         }
         super.onCreate(savedInstanceState);
@@ -87,12 +86,15 @@ public class AdminPlacesFragment extends Fragment {
         ImageView placeImage;
         TextView placeName;
         TextView placeDescritpion;
+        TextView Governate;
+        TextView Category;
         public PlacesHolder(View view) {
             super(view);
             placeImage = (ImageView) view.findViewById(R.id.placeImage);
             placeName = (TextView) view.findViewById(R.id.placeName);
             placeDescritpion = (TextView) view.findViewById(R.id.placeDescription);
-
+            Governate = (TextView) view.findViewById(R.id.placeGovernate);
+            Category = (TextView) view.findViewById(R.id.placeCategory);
         }
     }
 
@@ -113,6 +115,8 @@ public class AdminPlacesFragment extends Fragment {
             holder.placeImage.setImageResource(modela.getImage());
             holder.placeName.setText(modela.getPlaceName());
             holder.placeDescritpion.setText(modela.getPlaceDescription());
+            holder.Governate.setText(modela.getPlaceGovernate());
+            holder.Category.setText(modela.getPlaceCategory());
 
         }
         @Override

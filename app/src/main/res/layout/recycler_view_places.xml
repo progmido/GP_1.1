@@ -31,6 +31,32 @@
             android:textColor="@color/text"
             android:textSize="19sp" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1"
+
+            >
+
+            <customfonts.Textview_lato_thin
+                android:id="@+id/placeGovernate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Giza"
+                android:layout_weight="0.5"
+                android:gravity="center" />
+
+            <customfonts.Textview_lato_thin
+                android:id="@+id/placeCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pharoh"
+                android:layout_weight="0.5"
+                android:gravity="center" />
+        </LinearLayout>
+
+
         <customfonts.TextView_Lato
             android:id="@+id/placeDescription"
             android:layout_width="match_parent"
