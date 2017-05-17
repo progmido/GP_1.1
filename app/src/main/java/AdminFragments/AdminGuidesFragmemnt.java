@@ -23,7 +23,7 @@ import io.google.gp_11.R;
 public class AdminGuidesFragmemnt extends Fragment {
 
     private Integer[] IMAGE = {R.drawable.person1, R.drawable.person4, R.drawable.person5};
-    private String[] Name = {"Ahmed Abuelhassan", "Saad Khalifa", "Mohamed Atef"};
+    private String[] Name = {"salah", "Saad Khalifa", "Mohamed Atef"};
     private String[] email = {"ab.com", "sa.com", "tefa.com"};
 
     private ArrayList<model_guide> guideModels;
