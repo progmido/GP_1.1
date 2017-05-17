@@ -1,5 +1,6 @@
 package io.google.gp_11;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -62,10 +63,9 @@ public class AdminActivity extends AppCompatActivity {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
                         Fragment fragment = null;
-                        Class fragmentClass;
+                        Class fragmentClass = AdminHomeFragment.class;
                         switch (menuItem.getItemId()) {
                             case R.id.nav_home:
-
                                 fragmentClass = AdminHomeFragment.class;
                                 mToolbar.setTitle("Home");
                                 break;
@@ -84,6 +84,12 @@ public class AdminActivity extends AppCompatActivity {
                             case R.id.nav_places:
                                 fragmentClass = AdminPlacesFragment.class;
                                 mToolbar.setTitle("Places");
+                                break;
+
+                            case R.id.nav_profile:
+                                Intent intent = new Intent(AdminActivity.this, AdminUpdateUser.class);
+                                intent.putExtra("Mode", 2);
+                                startActivity(intent);
                                 break;
 
                             default:
