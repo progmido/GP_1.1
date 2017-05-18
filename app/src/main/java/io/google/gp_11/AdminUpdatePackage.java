@@ -9,13 +9,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 
@@ -38,6 +43,7 @@ public class AdminUpdatePackage extends AppCompatActivity
 
         EditText package_name = (EditText) findViewById(R.id.packageName);
         EditText Places = (EditText) findViewById(R.id.packagePlaces);
+        Spinner guide = (Spinner) findViewById(R.id.tour_Guide);
         fromDateEtxt = (EditText) findViewById(R.id.etxt_fromdate);
         toDateEtxt = (EditText) findViewById(R.id.etxt_todate);
         EditText Price = (EditText) findViewById(R.id.packagePrice);
@@ -51,6 +57,27 @@ public class AdminUpdatePackage extends AppCompatActivity
         fromDateEtxt.requestFocus();
         toDateEtxt = (EditText) findViewById(R.id.etxt_todate);
         toDateEtxt.setInputType(InputType.TYPE_NULL);
+
+
+        List<String> guides = new ArrayList<String>();
+        guides.add("abuelhassen");
+        guides.add("tifa");
+
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, guides);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        guide.setAdapter(dataAdapter);
+        guide.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String assigned_guide = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH);
