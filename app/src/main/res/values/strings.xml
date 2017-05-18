@@ -20,4 +20,7 @@
     <string name="title_top">Top fragment</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="user_spinner_title">Select Country</string>
+    <string name="placegovernorate_spinner_title">Select Governorate</string>
+    <string name="place_spinner_title">Select Category</string>
 </resources>

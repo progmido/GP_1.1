@@ -12,12 +12,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import AdminModels.model_place;
-import io.google.gp_11.AdminAddPlaceActivity;
+import io.google.gp_11.AdminUpdatePlace;
 import io.google.gp_11.R;
 
 
@@ -67,7 +68,8 @@ public class AdminPlacesFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // Click action
-                Intent intent = new Intent(getActivity(), AdminAddPlaceActivity.class);
+                Intent intent = new Intent(getActivity(), AdminUpdatePlace.class);
+                intent.putExtra("Mode", 2);
                 startActivity(intent);
             }
         });
@@ -88,6 +90,8 @@ public class AdminPlacesFragment extends Fragment {
         TextView placeDescritpion;
         TextView Governate;
         TextView Category;
+        LinearLayout ln;
+
         public PlacesHolder(View view) {
             super(view);
             placeImage = (ImageView) view.findViewById(R.id.placeImage);
@@ -117,7 +121,9 @@ public class AdminPlacesFragment extends Fragment {
             holder.placeDescritpion.setText(modela.getPlaceDescription());
             holder.Governate.setText(modela.getPlaceGovernate());
             holder.Category.setText(modela.getPlaceCategory());
-
+            Intent intent = new Intent(getActivity(), AdminUpdatePlace.class);
+            intent.putExtra("Mode", 1);
+            startActivity(intent);
         }
         @Override
         public int getItemCount() {

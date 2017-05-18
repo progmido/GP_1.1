@@ -110,10 +110,6 @@ public class AdminUpdateUser extends AppCompatActivity {
                 });
             }
         }
-        fname.setText("Ahmed Abuelhassen");
-        Age.setText("25");
-        phone.setText("01146000129");
-        country.setText("USA");
         if (mode == 2) {
             reset.setVisibility(View.GONE);
         }
