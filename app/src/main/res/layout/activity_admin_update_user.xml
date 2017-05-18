@@ -86,8 +86,9 @@
 
                         <EditText
                             android:id="@+id/userFullName"
-                            android:layout_width="wrap_content"
+                            android:layout_width="200dip"
                             android:layout_height="wrap_content"
+                            android:maxLength="15"
                             android:background="@android:color/transparent" />
                     </LinearLayout>
                 </LinearLayout>
@@ -124,8 +125,10 @@
 
                         <EditText
                             android:id="@+id/userAge"
-                            android:layout_width="wrap_content"
+                            android:layout_width="200dip"
                             android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:maxLength="2"
                             android:background="@android:color/transparent" />
                     </LinearLayout>
                 </LinearLayout>
@@ -162,7 +165,9 @@
 
                         <EditText
                             android:id="@+id/userNumberPhone"
-                            android:layout_width="wrap_content"
+                            android:maxLength="15"
+                            android:inputType="phone"
+                            android:layout_width="200dip"
                             android:layout_height="wrap_content"
                             android:background="@android:color/transparent" />
                     </LinearLayout>
@@ -200,7 +205,7 @@
 
                         <EditText
                             android:id="@+id/userCountry"
-                            android:layout_width="wrap_content"
+                            android:layout_width="200dip"
                             android:layout_height="wrap_content"
                             android:background="@android:color/transparent" />
                     </LinearLayout>

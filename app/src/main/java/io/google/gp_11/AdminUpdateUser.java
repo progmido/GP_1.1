@@ -42,6 +42,7 @@ public class AdminUpdateUser extends AppCompatActivity {
         EditText phone = (EditText) findViewById(R.id.userNumberPhone);
         EditText country = (EditText) findViewById(R.id.userCountry);
         Button reset = (Button) findViewById(R.id.reset);
+        Button delete = (Button) findViewById(R.id.delete);
         Toolbar mToolbar = (Toolbar) findViewById(R.id.nav_actionbar);
         Intent i = getIntent();
         mode = i.getExtras().getInt("Mode");
@@ -57,91 +58,6 @@ public class AdminUpdateUser extends AppCompatActivity {
             phone.setFocusable(false);
             country.setCursorVisible(false);
             country.setFocusable(false);
-        } else {
-            if (mode == 2) {
-                mToolbar.setTitle("My profile");
-                fname.setCursorVisible(true);
-                fname.setFocusable(true);
-                Age.setCursorVisible(true);
-                Age.setFocusable(true);
-                phone.setCursorVisible(true);
-                phone.setFocusable(true);
-                country.setCursorVisible(true);
-                country.setFocusable(true);
-
-                final String[] items = new String[]{"Take from camera", "Select from gallery"};
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, items);
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-                builder.setTitle("Select Image");
-                builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int item) { //pick from camera
-                        if (item == 0) {
-                            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                            mImageCaptureUri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(),
-                                    "tmp_avatar_" + String.valueOf(System.currentTimeMillis()) + ".jpg"));
-                            intent.putExtra(MediaStore.EXTRA_OUTPUT, mImageCaptureUri);
-                            try {
-                                intent.putExtra("return-data", true);
-
-                                startActivityForResult(intent, PICK_FROM_CAMERA);
-                            } catch (ActivityNotFoundException e) {
-                                e.printStackTrace();
-                            }
-                        } else { //pick from file
-                            Intent intent = new Intent();
-
-                            intent.setType("image/*");
-                            intent.setAction(Intent.ACTION_GET_CONTENT);
-
-                            startActivityForResult(Intent.createChooser(intent, "Complete action using"), PICK_FROM_FILE);
-                        }
-                    }
-                });
-
-                final AlertDialog dialog = builder.create();
-                banar1 = (ImageView) findViewById(R.id.banar1);
-                banar1.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        dialog.show();
-                    }
-                });
-            }
-        }
-        if (mode == 2) {
-            reset.setVisibility(View.GONE);
-        }
-        reset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(AdminUpdateUser.this);
-                alertDialog.setTitle("Confirm Reset ..");
-                alertDialog.setMessage("Are you sure you want reset password for this user?");
-                alertDialog.setIcon(R.drawable.reset);
-                alertDialog.setPositiveButton("YES",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                // Write your code here to execute after dialog
-                                Toast.makeText(AdminUpdateUser.this, "You clicked on YES", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                alertDialog.setNegativeButton("NO",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                // Write your code here to execute after dialog
-
-                                dialog.cancel();
-                            }
-                        });
-
-                // Showing Alert Message
-                alertDialog.show();
-            }
-        });
-        Button delete = (Button) findViewById(R.id.delete);
-        if (mode == 1) {
             delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -169,13 +85,81 @@ public class AdminUpdateUser extends AppCompatActivity {
                     alertDialog.show();
                 }
             });
+            reset.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(AdminUpdateUser.this);
+                    alertDialog.setTitle("Confirm Reset ..");
+                    alertDialog.setMessage("Are you sure you want reset password for this user?");
+                    alertDialog.setIcon(R.drawable.reset);
+                    alertDialog.setPositiveButton("YES",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // Write your code here to execute after dialog
+                                    Toast.makeText(AdminUpdateUser.this, "You clicked on YES", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                    alertDialog.setNegativeButton("NO",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // Write your code here to execute after dialog
+
+                                    dialog.cancel();
+                                }
+                            });
+
+                    // Showing Alert Message
+                    alertDialog.show();
+                }
+            });
         } else {
             if (mode == 2) {
+                mToolbar.setTitle("My profile");
+                fname.setCursorVisible(true);
+                fname.setFocusable(true);
+                Age.setCursorVisible(true);
+                Age.setFocusable(true);
+                phone.setCursorVisible(true);
+                phone.setFocusable(true);
+                country.setCursorVisible(true);
+                country.setFocusable(true);
+                reset.setVisibility(View.GONE);
                 delete.setText("Update");
-                // update listener
+                final String[] items = new String[]{"Take from camera", "Select from gallery"};
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, items);
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Select Image");
+                builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int item) { //pick from camera
+                        if (item == 0) {
+                            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                            mImageCaptureUri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(),
+                                    "tmp_avatar_" + String.valueOf(System.currentTimeMillis()) + ".jpg"));
+                            intent.putExtra(MediaStore.EXTRA_OUTPUT, mImageCaptureUri);
+                            try {
+                                intent.putExtra("return-data", true);
+                                startActivityForResult(intent, PICK_FROM_CAMERA);
+                            } catch (ActivityNotFoundException e) {
+                                e.printStackTrace();
+                            }
+                        } else { //pick from file
+                            Intent intent = new Intent();
+                            intent.setType("image/*");
+                            intent.setAction(Intent.ACTION_GET_CONTENT);
+                            startActivityForResult(Intent.createChooser(intent, "Complete action using"), PICK_FROM_FILE);
+                        }
+                    }
+                });
+                final AlertDialog dialog = builder.create();
+                banar1 = (ImageView) findViewById(R.id.banar1);
+                banar1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.show();
+                    }
+                });
             }
         }
-
 
     }
 

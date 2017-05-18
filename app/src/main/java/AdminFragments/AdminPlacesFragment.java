@@ -99,6 +99,7 @@ public class AdminPlacesFragment extends Fragment {
             placeDescritpion = (TextView) view.findViewById(R.id.placeDescription);
             Governate = (TextView) view.findViewById(R.id.placeGovernate);
             Category = (TextView) view.findViewById(R.id.placeCategory);
+            ln = (LinearLayout) view.findViewById(R.id.linearLayoutPlace);
         }
     }
 
@@ -121,9 +122,15 @@ public class AdminPlacesFragment extends Fragment {
             holder.placeDescritpion.setText(modela.getPlaceDescription());
             holder.Governate.setText(modela.getPlaceGovernate());
             holder.Category.setText(modela.getPlaceCategory());
-            Intent intent = new Intent(getActivity(), AdminUpdatePlace.class);
-            intent.putExtra("Mode", 1);
-            startActivity(intent);
+            holder.ln.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), AdminUpdatePlace.class);
+                    intent.putExtra("Mode", 1);
+                    startActivity(intent);
+                }
+            });
+
         }
         @Override
         public int getItemCount() {

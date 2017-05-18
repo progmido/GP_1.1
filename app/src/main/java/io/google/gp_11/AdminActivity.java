@@ -42,6 +42,15 @@ public class AdminActivity extends AppCompatActivity {
             navigationView.getMenu().performIdentifierAction(R.id.nav_home, 0);
             mToolbar.setTitle("Home");
             navigationView.getMenu().getItem(0).setChecked(true);
+        } else {
+
+            int intentFragment = getIntent().getExtras().getInt("frgToLoad");
+            switch (intentFragment) {
+                case 2:
+                    Fragment fragment = null;
+
+                    break;
+            }
         }
 
     }

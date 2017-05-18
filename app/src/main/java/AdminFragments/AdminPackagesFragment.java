@@ -11,12 +11,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import AdminModels.model_package;
-import io.google.gp_11.AdminAddPackageActivity;
+import io.google.gp_11.AdminUpdatePackage;
 import io.google.gp_11.R;
 
 
@@ -64,7 +65,8 @@ public class AdminPackagesFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 // Click action
-                Intent intent = new Intent(getActivity(), AdminAddPackageActivity.class);
+                Intent intent = new Intent(getActivity(), AdminUpdatePackage.class);
+                intent.putExtra("Mode", 2);
                 startActivity(intent);
             }
         });
@@ -86,7 +88,7 @@ public class AdminPackagesFragment extends Fragment {
         TextView placesingpckg;
         TextView time;
         TextView price;
-        // LinearLayout ln;
+        LinearLayout ln;
         public PackagesHolder(View view) {
             super(view);
             start = (TextView) view.findViewById(R.id.start);
@@ -95,7 +97,8 @@ public class AdminPackagesFragment extends Fragment {
             placesingpckg = (TextView) view.findViewById(R.id.placesinpckg);
             time = (TextView) view.findViewById(R.id.timetostart);
             price = (TextView) view.findViewById(R.id.price);
-//                ln = (LinearLayout) view.findViewById(R.id.total);
+            ln = (LinearLayout) view.findViewById(R.id.linearLayoutPackage);
+
         }
     }
 
@@ -122,14 +125,14 @@ public class AdminPackagesFragment extends Fragment {
             holder.end.setText((modela.getEnd()));
             holder.time.setText(modela.getTime());
             holder.price.setText(modela.getPrice());
-//            holder.ln.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(context,DetailsActivity.class);
-//                intent.putExtra("started",movie.getStart());
-//                context.startActivity(intent);
-//            }
-//        });
+            holder.ln.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), AdminUpdatePackage.class);
+                    intent.putExtra("Mode", 1);
+                    startActivity(intent);
+                }
+            });
 
         }
 

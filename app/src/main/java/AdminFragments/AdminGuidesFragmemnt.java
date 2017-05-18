@@ -16,7 +16,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import AdminModels.model_guide;
-import io.google.gp_11.AdminAddGuideActivity;
 import io.google.gp_11.AdminUpdateUser;
 import io.google.gp_11.R;
 
@@ -47,7 +46,7 @@ public class AdminGuidesFragmemnt extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_guides_admin, container, false);
@@ -57,7 +56,8 @@ public class AdminGuidesFragmemnt extends Fragment {
             @Override
             public void onClick(View view) {
                 // Click action
-                Intent intent = new Intent(getActivity(), AdminAddGuideActivity.class);
+                Intent intent = new Intent(getActivity(), AdminUpdateUser.class);
+                intent.putExtra("Mode", 3);
                 startActivity(intent);
             }
         });

@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -27,30 +28,51 @@ public class AdminUpdatePlace extends AppCompatActivity implements AdapterView.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_update_place);
 
+
         EditText place_name = (EditText) findViewById(R.id.place_Name);
         Spinner category = (Spinner) findViewById(R.id.place_category);
         Spinner governorate = (Spinner) findViewById(R.id.place_Governate);
         EditText Description = (EditText) findViewById(R.id.place_description);
-        Button Update = (Button) findViewById(R.id.update);
-        Button delete = (Button) findViewById(R.id.delete);
+        LinearLayout img = (LinearLayout) findViewById(R.id.placeimagetoview);
+        Button Update = (Button) findViewById(R.id.updatePlace);
+        Button delete = (Button) findViewById(R.id.deletePlace);
         Toolbar mToolbar = (Toolbar) findViewById(R.id.nav_actionbar);
 
         category.setOnItemSelectedListener(this);
-//        governorate.setOnItemSelectedListener(this);
+        governorate.setOnItemSelectedListener(this);
+
 
         List<String> categories = new ArrayList<String>();
 
         categories.add("relgious");
         categories.add("ancient");
 
+        List<String> governates = new ArrayList<String>();
+        governates.add("Cairo");
+        governates.add("Giza");
+        governates.add("sinai");
+
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> Adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, governates);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         category.setAdapter(dataAdapter);
+        governorate.setAdapter(Adapter);
+
 
         Intent i = getIntent();
         mode = i.getExtras().getInt("Mode");
 
         if (mode == 1) {
+
+            String myString = "ancient"; //the value you want the position for
+            ArrayAdapter myAdap = (ArrayAdapter) category.getAdapter(); //cast to an ArrayAdapter
+            int spinnerPosition = myAdap.getPosition(myString);
+            //set the default according to value
+            category.setSelection(spinnerPosition);
+
+
+            img.setBackgroundResource(R.drawable.egyptianmuseum);
             mToolbar.setTitle("Update Place");
             Update.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -63,7 +85,7 @@ public class AdminUpdatePlace extends AppCompatActivity implements AdapterView.O
                 public void onClick(View v) {
                     AlertDialog.Builder alertDialog = new AlertDialog.Builder(AdminUpdatePlace.this);
                     alertDialog.setTitle("Confirm Delete ..");
-                    alertDialog.setMessage("Are you sure you want delete this user?");
+                    alertDialog.setMessage("Are you sure you want delete this Place?");
                     alertDialog.setIcon(R.drawable.delete);
                     alertDialog.setPositiveButton("YES",
                             new DialogInterface.OnClickListener() {
@@ -101,18 +123,22 @@ public class AdminUpdatePlace extends AppCompatActivity implements AdapterView.O
             }
         }
     }
-
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        // On selecting a spinner item
-        String item = parent.getItemAtPosition(position).toString();
 
-        // Showing selected spinner item
+        Spinner spin = (Spinner) parent;
+        if (spin.getId() == R.id.place_category) {
+            String item = parent.getItemAtPosition(position).toString();
+        } else {
+            if (spin.getId() == R.id.place_Governate) {
+                String item = parent.getItemAtPosition(position).toString();
+            }
+        }
 
     }
-
     public void onNothingSelected(AdapterView<?> arg0) {
         // TODO Auto-generated method stub
+
     }
 
 }
