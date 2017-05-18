@@ -118,6 +118,8 @@ public class AdminUpdateUser extends AppCompatActivity {
                                             @Override
                                             public void onResponse(Call<Void> call, Response<Void> response) {
                                                 Toast.makeText(AdminUpdateUser.this, "Deleted", Toast.LENGTH_SHORT).show();
+                                                Intent i_to_admin = new Intent(AdminUpdateUser.this, AdminActivity.class);
+                                                startActivity(i_to_admin);
 
                                             }
 

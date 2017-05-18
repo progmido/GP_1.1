@@ -1,5 +1,6 @@
 package AdminFragments;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -38,6 +39,7 @@ public class AdminUsersFragment extends Fragment {
     private RecyclerView recyclerView;
     private fragment_user_adapter UserAdapter;
     Retrofit retrofit;
+    ProgressDialog progressDialog;
 
     public AdminUsersFragment() {
         // Required empty public constructor
@@ -59,6 +61,8 @@ public class AdminUsersFragment extends Fragment {
 //        }
 
         super.onCreate(savedInstanceState);
+        progressDialog = new ProgressDialog(this.getContext());
+        progressDialog.show();
         getUsers();
     }
 
@@ -165,6 +169,7 @@ public class AdminUsersFragment extends Fragment {
             holder.ln.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    //progressDialog.show();
                     Intent intent = new Intent(getActivity(), AdminUpdateUser.class);
                     Bundle bundle = new Bundle();
                     bundle.putInt("id", models.get(position).getId());
@@ -180,6 +185,7 @@ public class AdminUsersFragment extends Fragment {
                     intent.putExtra("Mode", 1);
 
                     // intent.putExtra();
+                    //progressDialog.dismiss();
                     startActivity(intent);
 //                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
 //                    alertDialog.setTitle("Confirm Delete...");
@@ -205,7 +211,7 @@ public class AdminUsersFragment extends Fragment {
 //                    alertDialog.show();
                 }
             });
-
+            progressDialog.dismiss();
 
         }
         @Override

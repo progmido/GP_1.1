@@ -29,10 +29,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        EditText username = (EditText) findViewById(R.id.usr_name);
-        String inputname = username.getText().toString();
-        EditText userpass = (EditText) findViewById(R.id.user_password);
-        String inputPass = userpass.getText().toString();
+        final EditText username = (EditText) findViewById(R.id.usr_name);
+
+        final EditText userpass = (EditText) findViewById(R.id.user_password);
+
         //give you input name and input pass and you give me the type id
         //assume you retrieve me 1 it means this is admin
         type = 0;
@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 user = new user();
+                String inputname = username.getText().toString();
+                String inputPass = userpass.getText().toString();
                 login("", "");
                 if (
                     //user.getTypeId() == 2
