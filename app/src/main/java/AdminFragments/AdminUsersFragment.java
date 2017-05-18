@@ -73,6 +73,7 @@ public class AdminUsersFragment extends Fragment {
         return view;
 
     }
+
     private void updateUI() {
         UserAdapter = new fragment_user_adapter(users);
         recyclerView.setAdapter(UserAdapter);
@@ -132,6 +133,7 @@ public class AdminUsersFragment extends Fragment {
         TextView username;
         TextView usercounrty;
         LinearLayout ln;
+
         public UsersHolder(View view) {
             super(view);
             userimage = (de.hdodenhof.circleimageview.CircleImageView) view.findViewById(R.id.personimage);
@@ -148,12 +150,14 @@ public class AdminUsersFragment extends Fragment {
         public fragment_user_adapter(ArrayList<user> Models) {
             models = Models;
         }
+
         @Override
         public UsersHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
             View view = layoutInflater.inflate(R.layout.recycler_view_users, parent, false);
             return new UsersHolder(view);
         }
+
         @Override
         public void onBindViewHolder(UsersHolder holder, final int position) {
 
@@ -208,6 +212,7 @@ public class AdminUsersFragment extends Fragment {
 
 
         }
+
         @Override
         public int getItemCount() {
             return models.size();

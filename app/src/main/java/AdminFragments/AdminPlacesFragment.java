@@ -27,8 +27,8 @@ import io.google.gp_11.R;
  */
 public class AdminPlacesFragment extends Fragment {
 
-    private Integer[] IMAGE = {R.drawable.pyramids, R.drawable.tower, R.drawable.egyptianmuseum,R.drawable.sinai};
-    private String[] placeName = {"Pyramids", "Cairo Tower", "Egyptian Museum","Mount Sinai"};
+    private Integer[] IMAGE = {R.drawable.pyramids, R.drawable.tower, R.drawable.egyptianmuseum, R.drawable.sinai};
+    private String[] placeName = {"Pyramids", "Cairo Tower", "Egyptian Museum", "Mount Sinai"};
     private String[] govenate = {"Giza", "Cairo", "Cairo", "Sinai"};
     private String[] category = {"historical", "historical", "historical", "historical"};
     private String[] placeDescription = {"The Egyptian pyramids are ancient pyramid-shaped masonry structures located in Egypt. The Great Pyramid was listed as one of the Seven Wonders of the World.",
@@ -48,8 +48,7 @@ public class AdminPlacesFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         placeModels = new ArrayList<>();
-        for(int i=0 ;i<placeName.length;i++)
-        {
+        for (int i = 0; i < placeName.length; i++) {
             model_place PlaceModelForRecyclerView = new model_place(IMAGE[i], placeName[i], placeDescription[i], govenate[i], category[i]);
             placeModels.add(PlaceModelForRecyclerView);
         }
@@ -61,7 +60,7 @@ public class AdminPlacesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_places_admin, container, false);
+        View view = inflater.inflate(R.layout.fragment_places_admin, container, false);
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setImageResource(R.drawable.addplace);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -105,15 +104,18 @@ public class AdminPlacesFragment extends Fragment {
 
     private class fragment_place_adapter extends RecyclerView.Adapter<PlacesHolder> {
         private ArrayList<model_place> models;
+
         public fragment_place_adapter(ArrayList<model_place> Models) {
             models = Models;
         }
+
         @Override
         public PlacesHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
             View view = layoutInflater.inflate(R.layout.recycler_view_places, parent, false);
             return new PlacesHolder(view);
         }
+
         @Override
         public void onBindViewHolder(PlacesHolder holder, int position) {
             final model_place modela = models.get(position);
@@ -132,6 +134,7 @@ public class AdminPlacesFragment extends Fragment {
             });
 
         }
+
         @Override
         public int getItemCount() {
             return models.size();

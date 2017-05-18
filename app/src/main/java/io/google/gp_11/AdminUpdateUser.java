@@ -222,7 +222,20 @@ public class AdminUpdateUser extends AppCompatActivity {
                         dialog.show();
                     }
                 });
+            } else {
+                if (mode == 3) {
+                    mToolbar.setTitle("Add new User");
+                    reset.setVisibility(View.GONE);
+                    delete.setText("Create");
+                    delete.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(AdminUpdateUser.this, "Place created", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
             }
+
         }
 ////<<<<<<< Updated
 ////=======

@@ -123,6 +123,7 @@ public class AdminUpdatePlace extends AppCompatActivity implements AdapterView.O
             }
         }
     }
+
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
@@ -136,6 +137,7 @@ public class AdminUpdatePlace extends AppCompatActivity implements AdapterView.O
         }
 
     }
+
     public void onNothingSelected(AdapterView<?> arg0) {
         // TODO Auto-generated method stub
 

@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     Retrofit retrofit;
     int type;
     private user user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
