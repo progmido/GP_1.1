@@ -114,6 +114,7 @@ public class AdminGuidesFragmemnt extends Fragment {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getActivity(), AdminUpdateUser.class);
+                    intent.putExtra("Mode", 1);
                     startActivity(intent);
 
                 }
