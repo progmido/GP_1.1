@@ -29,6 +29,7 @@
             android:src="@drawable/sinai" />
 
         <TextView
+            android:id="@+id/username_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -37,6 +38,7 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/Email_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"

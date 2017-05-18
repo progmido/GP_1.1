@@ -17,17 +17,27 @@ import java.util.ArrayList;
 import AdminModels.model_user;
 import io.google.gp_11.AdminUpdateUser;
 import io.google.gp_11.R;
+import models.ResultUserSet;
+import models.ToEgyptAPI;
+import models.country;
+import models.user;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class AdminUsersFragment extends Fragment {
 
     private Integer[] IMAGE = {R.drawable.person1, R.drawable.person4, R.drawable.person5};
-    private String[] Name = {"Ahmed Abuelhassan", "Saad Khalifa", "Mohamed Atef"};
-    private String[] country = {"USA", "SPAIN", "ITALY"};
-
+    private String[] Name = {"Ahmed Abuelhassan", "Saad Khalifa", "Medo Atef"};
+    //private String[] country = {"USA", "SPAIN", "ITALY"};
+    private ArrayList<user> users;
+    private String country;
     private ArrayList<model_user> userModels;
     private RecyclerView recyclerView;
     private fragment_user_adapter UserAdapter;
-
+    Retrofit retrofit;
 
     public AdminUsersFragment() {
         // Required empty public constructor
@@ -36,12 +46,20 @@ public class AdminUsersFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        userModels = new ArrayList<>();
-        for (int i = 0; i < Name.length; i++) {
-            model_user UserModelForRecyclerView = new model_user(IMAGE[i], Name[i], country[i]);
-            userModels.add(UserModelForRecyclerView);
-        }
+        //     userModels = new ArrayList<>();
+        users = new ArrayList<>();
+        retrofit = new Retrofit.Builder()
+                .baseUrl("http://2egyptwebservice.somee.com")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+//        for (int i = 0; i < Name.length; i++) {
+//            model_user UserModelForRecyclerView = new model_user(IMAGE[i], Name[i], country[i]);
+//            userModels.add(UserModelForRecyclerView);
+//        }
+
         super.onCreate(savedInstanceState);
+        getUsers();
     }
 
     @Override
@@ -56,10 +74,58 @@ public class AdminUsersFragment extends Fragment {
 
     }
     private void updateUI() {
-        UserAdapter = new fragment_user_adapter(userModels);
+        UserAdapter = new fragment_user_adapter(users);
         recyclerView.setAdapter(UserAdapter);
     }
 
+    private void getUsers() {
+        try {
+
+            ToEgyptAPI toEgyptAPI = retrofit.create(ToEgyptAPI.class);
+            Call<ResultUserSet> connection = toEgyptAPI.getUsers();
+            connection.enqueue(new Callback<ResultUserSet>() {
+                @Override
+                public void onResponse(Call<ResultUserSet> call, Response<ResultUserSet> response) {
+                    users = (ArrayList<user>) response.body().getUsers();
+                    updateUI();
+                }
+
+                @Override
+                public void onFailure(Call<ResultUserSet> call, Throwable t) {
+
+                }
+            });
+        } catch (Exception ex) {
+
+
+        }
+
+    }
+
+    private String getCountry(int id) {
+        final String[] country1 = {new String()};
+        try {
+
+            ToEgyptAPI toEgyptAPI = retrofit.create(ToEgyptAPI.class);
+            Call<country> connection = toEgyptAPI.getCountry(id);
+            connection.enqueue(new Callback<country>() {
+                @Override
+                public void onResponse(Call<country> call, Response<country> response) {
+                    country1[0] = response.body().getName();
+                    updateUI();
+                }
+
+                @Override
+                public void onFailure(Call<country> call, Throwable t) {
+
+                }
+            });
+        } catch (Exception ex) {
+
+
+        }
+        return country1[0];
+    }
 
     private class UsersHolder extends RecyclerView.ViewHolder {
         de.hdodenhof.circleimageview.CircleImageView userimage;
@@ -77,8 +143,9 @@ public class AdminUsersFragment extends Fragment {
     }
 
     private class fragment_user_adapter extends RecyclerView.Adapter<UsersHolder> {
-        private ArrayList<model_user> models;
-        public fragment_user_adapter(ArrayList<model_user> Models) {
+        private ArrayList<user> models;
+
+        public fragment_user_adapter(ArrayList<user> Models) {
             models = Models;
         }
         @Override
@@ -88,18 +155,32 @@ public class AdminUsersFragment extends Fragment {
             return new UsersHolder(view);
         }
         @Override
-        public void onBindViewHolder(UsersHolder holder, int position) {
-            final model_user modela = models.get(position);
-            holder.userimage.setImageResource(modela.getImage());
-            holder.username.setText(modela.getName());
-            holder.usercounrty.setText(modela.getCountry());
+        public void onBindViewHolder(UsersHolder holder, final int position) {
+
+            final user modela = models.get(position);
+            country = getCountry(modela.getId());
+            holder.userimage.setImageResource(R.drawable.person1);
+            holder.username.setText(modela.getUsername());
+            holder.usercounrty.setText(country);
             holder.ln.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getActivity(), AdminUpdateUser.class);
-                    intent.putExtra("Mode", 1);
-                    startActivity(intent);
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("id", models.get(position).getId());
+                    bundle.putString("fullname", models.get(position).getFullname());
+                    bundle.putString("username", models.get(position).getUsername());
+                    bundle.putInt("age", models.get(position).getAge());
+                    bundle.putInt("phone", models.get(position).getPhonenumber());
+                    bundle.putInt("country", models.get(position).getCountryId());
+                    bundle.putInt("age", models.get(position).getAge());
+                    bundle.putString("Email", models.get(position).getEmail());
 
+                    intent.putExtras(bundle);
+                    intent.putExtra("Mode", 1);
+
+                    // intent.putExtra();
+                    startActivity(intent);
 //                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
 //                    alertDialog.setTitle("Confirm Delete...");
 //                    alertDialog.setMessage("Are you sure you want delete this?");
@@ -145,5 +226,6 @@ public class AdminUsersFragment extends Fragment {
         super.onDetach();
 
     }
+
 
 }
