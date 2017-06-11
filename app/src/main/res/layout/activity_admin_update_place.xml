@@ -10,18 +10,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <LinearLayout
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Place Image"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <ImageView
         android:id="@+id/placeimagetoview"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        android:background="@drawable/mounteun"
         android:orientation="vertical">
 
 
-    </LinearLayout>
+    </ImageView>
 
     <ScrollView
         android:layout_width="match_parent"

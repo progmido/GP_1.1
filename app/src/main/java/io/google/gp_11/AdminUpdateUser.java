@@ -224,7 +224,53 @@ public class AdminUpdateUser extends AppCompatActivity {
                         dialog.show();
                     }
                 });
+            } else {
+                if (mode == 3) {
+                    mToolbar.setTitle("Add new User");
+                    reset.setVisibility(View.GONE);
+                    delete.setText("Create");
+                    final String[] items = new String[]{"Take from camera", "Select from gallery"};
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.select_dialog_item, items);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setTitle("Select Image");
+                    builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int item) { //pick from camera
+                            if (item == 0) {
+                                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                mImageCaptureUri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(),
+                                        "tmp_avatar_" + String.valueOf(System.currentTimeMillis()) + ".jpg"));
+                                intent.putExtra(MediaStore.EXTRA_OUTPUT, mImageCaptureUri);
+                                try {
+                                    intent.putExtra("return-data", true);
+                                    startActivityForResult(intent, PICK_FROM_CAMERA);
+                                } catch (ActivityNotFoundException e) {
+                                    e.printStackTrace();
+                                }
+                            } else { //pick from file
+                                Intent intent = new Intent();
+                                intent.setType("image/*");
+                                intent.setAction(Intent.ACTION_GET_CONTENT);
+                                startActivityForResult(Intent.createChooser(intent, "Complete action using"), PICK_FROM_FILE);
+                            }
+                        }
+                    });
+                    final AlertDialog dialog = builder.create();
+                    banar1 = (ImageView) findViewById(R.id.banar1);
+                    banar1.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            dialog.show();
+                        }
+                    });
+                    delete.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(AdminUpdateUser.this, "Place created", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
             }
+
         }
 ////<<<<<<< Updated
 ////=======

@@ -14,8 +14,7 @@
         android:layout_marginTop="5dp"
         android:background="@drawable/card_bg_package"
         android:orientation="vertical"
-        android:id="@+id/linearLayoutPackage"
-        >
+        android:id="@+id/linearLayoutPackage">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,8 +28,6 @@
                 android:layout_marginLeft="10dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
-
-
 
 
                 <customfonts.TextView_Lato
@@ -65,6 +62,7 @@
                         android:text="@string/start"
                         android:textColor="#00B873"
                         android:layout_weight="0.88" />
+
                     <customfonts.Textview_lato_thin
                         android:id="@+id/end"
 

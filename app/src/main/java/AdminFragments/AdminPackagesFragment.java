@@ -42,7 +42,6 @@ public class AdminPackagesFragment extends Fragment {
     }
 
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         packageModels = new ArrayList<>();
@@ -89,6 +88,7 @@ public class AdminPackagesFragment extends Fragment {
         TextView time;
         TextView price;
         LinearLayout ln;
+
         public PackagesHolder(View view) {
             super(view);
             start = (TextView) view.findViewById(R.id.start);
@@ -141,6 +141,7 @@ public class AdminPackagesFragment extends Fragment {
             return models.size();
         }
     }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
